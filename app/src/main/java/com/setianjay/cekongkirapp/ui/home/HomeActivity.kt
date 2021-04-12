@@ -1,7 +1,8 @@
-package com.setianjay.cekongkirapp
+package com.setianjay.cekongkirapp.ui.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.setianjay.cekongkirapp.R
 
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
