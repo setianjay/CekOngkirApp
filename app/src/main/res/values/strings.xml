@@ -2,4 +2,7 @@
     <string name="app_name">CekOngkirApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="cek_ongkos_kirim">cek ongkos kirim</string>
+    <string name="kota_asal">Kota asal</string>
+    <string name="kota_tujuan">Kota tujuan</string>
 </resources>
