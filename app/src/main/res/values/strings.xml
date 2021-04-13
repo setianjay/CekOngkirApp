@@ -7,4 +7,6 @@
     <string name="kota_tujuan">Kota tujuan</string>
     <string name="lacak_no_resi">Lacak No. resi</string>
     <string name="cari_kota">Cari Kota</string>
+    <string name="nama_kecamatan">Nama Kecamatan</string>
+    <string name="nama_kota">Nama Kota</string>
 </resources>

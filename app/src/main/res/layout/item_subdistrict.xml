@@ -7,10 +7,10 @@
     android:padding="10dp">
 
     <TextView
-        android:id="@+id/tv_city_name"
+        android:id="@+id/tv_subdistrict_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/nama_kota"
+        android:text="@string/nama_kecamatan"
         android:padding="10dp"/>
 
 </FrameLayout>
