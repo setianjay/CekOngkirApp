@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:inputType="text"
             android:drawableEnd="@drawable/ic_search"
-            android:background="transparent"
+            android:background="@android:color/transparent"
             android:hint="@string/cari_kota"
             android:autofillHints="@string/cari_kota"
             android:textColor="@color/color_8f8f8f"
