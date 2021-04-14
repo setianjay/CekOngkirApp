@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
@@ -35,16 +36,20 @@ class CityFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.titleBar.postValue("Pilih Kota")
+        initView()
         setupRecycleView()
         setupObserve()
         initListener()
     }
 
+    private fun initView(){
+        viewModel.titleBar.postValue("Pilih Kota")
+    }
+
     private fun setupRecycleView(){
-        cityAdapter = CityAdapter(mutableListOf(),object : CityAdapter.OnAdapterListener{
+        cityAdapter = CityAdapter(arrayListOf(),object : CityAdapter.OnAdapterListener{
             override fun onClick(data: CityResponse.RajaOngkir.Results) {
-                Toast.makeText(context, "${data.city_name}", Toast.LENGTH_SHORT).show()
+                Timber.d("City : ${data.city_name}")
             }
         })
 
@@ -74,6 +79,11 @@ class CityFragment : Fragment() {
 
 
     private fun initListener(){
+        binding.etFindCity.doAfterTextChanged {
+
+            cityAdapter.filter.filter(it.toString())
+        }
+
         binding.container.setOnClickListener {
             findNavController().navigate(R.id.action_cityFragment_to_subDistrictFragment)
         }
