@@ -7,5 +7,5 @@ import retrofit2.http.GET
 interface RajaOngkirEndPoint {
 
     @GET("city")
-    suspend fun getCity(): Response<CityResponse>
+    suspend fun city(): Response<CityResponse>
 }
