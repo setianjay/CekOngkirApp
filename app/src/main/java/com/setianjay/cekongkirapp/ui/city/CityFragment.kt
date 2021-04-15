@@ -64,13 +64,16 @@ class CityFragment : Fragment() {
         viewModel.cityResponse.observe(viewLifecycleOwner){
             when(it){
                 is Resource.Loading -> {
+                    binding.rlCity.isRefreshing = true
                     Timber.e("rajaOngkir: isLoading")
                 }
                 is Resource.Success -> {
 //                    Timber.e("RajaOngkir: ${it.data!!.rajaongkir}")
+                    binding.rlCity.isRefreshing = false
                     cityAdapter.setData(it.data!!.rajaongkir.results)
                 }
                 is Resource.Error -> {
+                    binding.rlCity.isRefreshing = false
                     Timber.e("RajaOngkir: isError")
                 }
             }
@@ -80,8 +83,11 @@ class CityFragment : Fragment() {
 
     private fun initListener(){
         binding.etFindCity.doAfterTextChanged {
-
             cityAdapter.filter.filter(it.toString())
+        }
+
+        binding.rlCity.setOnRefreshListener {
+            viewModel.fetchCity()
         }
 
         binding.container.setOnClickListener {
