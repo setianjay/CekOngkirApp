@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -49,7 +50,11 @@ class CityFragment : Fragment() {
     private fun setupRecycleView(){
         cityAdapter = CityAdapter(arrayListOf(),object : CityAdapter.OnAdapterListener{
             override fun onClick(data: CityResponse.RajaOngkir.Results) {
-                Timber.d("City : ${data.city_name}")
+                findNavController().navigate(
+                    R.id.action_cityFragment_to_subDistrictFragment, bundleOf(
+                        "city_id" to data.city_id, "city_name" to data.city_name
+                    )
+                )
             }
         })
 
@@ -88,10 +93,6 @@ class CityFragment : Fragment() {
 
         binding.rlCity.setOnRefreshListener {
             viewModel.fetchCity()
-        }
-
-        binding.container.setOnClickListener {
-            findNavController().navigate(R.id.action_cityFragment_to_subDistrictFragment)
         }
     }
 }

@@ -9,10 +9,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.setianjay.cekongkirapp.R
 import com.setianjay.cekongkirapp.databinding.FragmentSubdistrictBinding
 import com.setianjay.cekongkirapp.ui.city.CityViewModel
+import timber.log.Timber
 
 class SubDistrictFragment : Fragment() {
     private val viewModel: CityViewModel by lazy { ViewModelProvider(requireActivity()).get(CityViewModel::class.java) }
     private lateinit var binding: FragmentSubdistrictBinding
+    private val cityId by lazy { requireArguments().getString("city_id") }
+    private val cityName by lazy { requireArguments().getString("city_name") }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,6 +28,12 @@ class SubDistrictFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupView()
+    }
+
+    private fun setupView(){
         viewModel.titleBar.postValue("Pilih Kecamatan")
+        Timber.e("cityId: $cityId")
+        Timber.e("cityName: $cityName")
     }
 }
