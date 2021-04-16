@@ -6,14 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.setianjay.cekongkirapp.R
 import com.setianjay.cekongkirapp.databinding.FragmentSubdistrictBinding
+import com.setianjay.cekongkirapp.network.resource.Resource
+import com.setianjay.cekongkirapp.network.response.SubDistrictResponse
 import com.setianjay.cekongkirapp.ui.city.CityViewModel
 import timber.log.Timber
 
 class SubDistrictFragment : Fragment() {
     private val viewModel: CityViewModel by lazy { ViewModelProvider(requireActivity()).get(CityViewModel::class.java) }
     private lateinit var binding: FragmentSubdistrictBinding
+    private lateinit var subDistrictAdapter: SubDistrictAdapter
     private val cityId by lazy { requireArguments().getString("city_id") }
     private val cityName by lazy { requireArguments().getString("city_name") }
 
@@ -29,11 +34,53 @@ class SubDistrictFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupView()
+        setupRecycleView()
+        setupObserve()
+        setupListener()
     }
 
     private fun setupView(){
         viewModel.titleBar.postValue("Pilih Kecamatan")
         Timber.e("cityId: $cityId")
         Timber.e("cityName: $cityName")
+    }
+
+    private fun setupRecycleView(){
+        subDistrictAdapter = SubDistrictAdapter(arrayListOf(),object : SubDistrictAdapter.OnAdapterListener{
+            override fun onClick(data: SubDistrictResponse.RajaOngkir.Results) {
+                Timber.e("subDistrict: ${data.subdistrict_name}")
+            }
+        })
+
+        binding.rvSubdistrict.apply {
+            layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+            adapter = subDistrictAdapter
+            setHasFixedSize(true)
+        }
+    }
+
+    private fun setupObserve(){
+        viewModel.subDistrictResponse.observe(viewLifecycleOwner){
+            when(it){
+                is Resource.Loading -> {
+                    binding.rlSubdistrict.isRefreshing = true
+                    Timber.e("RajaOngkir: isLoading")
+                }
+                is Resource.Success -> {
+                    binding.rlSubdistrict.isRefreshing = false
+                    subDistrictAdapter.setData(it.data!!.rajaongkir.results)
+                }
+                is Resource.Error -> {
+                    binding.rlSubdistrict.isRefreshing = false
+                    Timber.e("RajaOngkir: isError")
+                }
+            }
+        }
+    }
+
+    private fun setupListener(){
+        binding.rlSubdistrict.setOnRefreshListener {
+            viewModel.fetchSubDistrict(cityId!!)
+        }
     }
 }

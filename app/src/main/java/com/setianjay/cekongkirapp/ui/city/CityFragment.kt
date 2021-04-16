@@ -50,6 +50,7 @@ class CityFragment : Fragment() {
     private fun setupRecycleView(){
         cityAdapter = CityAdapter(arrayListOf(),object : CityAdapter.OnAdapterListener{
             override fun onClick(data: CityResponse.RajaOngkir.Results) {
+                viewModel.fetchSubDistrict(data.city_id)
                 findNavController().navigate(
                     R.id.action_cityFragment_to_subDistrictFragment, bundleOf(
                         "city_id" to data.city_id, "city_name" to data.city_name
