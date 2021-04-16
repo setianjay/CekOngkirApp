@@ -19,7 +19,7 @@ class CostPreferences(context: Context) {
         }
     }
 
-    fun getString(key: String): String?{
+    fun getString(key: String): String? {
         return sharedPref.getString(key,null)
     }
 }

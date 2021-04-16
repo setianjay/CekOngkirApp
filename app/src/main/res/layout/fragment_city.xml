@@ -13,7 +13,8 @@
         android:layout_height="match_parent"
         android:paddingStart="20dp"
         android:paddingTop="20dp"
-        android:paddingEnd="20dp">
+        android:paddingEnd="20dp"
+        android:focusableInTouchMode="true">
 
         <EditText
             android:id="@+id/et_find_city"

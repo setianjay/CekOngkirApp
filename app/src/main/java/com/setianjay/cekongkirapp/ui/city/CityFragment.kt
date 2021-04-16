@@ -1,12 +1,16 @@
 package com.setianjay.cekongkirapp.ui.city
 
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.os.bundleOf
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.ViewModel
@@ -49,7 +53,9 @@ class CityFragment : Fragment() {
 
     private fun setupRecycleView(){
         cityAdapter = CityAdapter(arrayListOf(),object : CityAdapter.OnAdapterListener{
+            @RequiresApi(Build.VERSION_CODES.M)
             override fun onClick(data: CityResponse.RajaOngkir.Results) {
+                hideKeyboard()
                 viewModel.fetchSubDistrict(data.city_id)
                 findNavController().navigate(
                     R.id.action_cityFragment_to_subDistrictFragment, bundleOf(
@@ -95,5 +101,11 @@ class CityFragment : Fragment() {
         binding.rlCity.setOnRefreshListener {
             viewModel.fetchCity()
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun hideKeyboard(){
+        val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(requireView().getWindowToken(), 0)
     }
 }
