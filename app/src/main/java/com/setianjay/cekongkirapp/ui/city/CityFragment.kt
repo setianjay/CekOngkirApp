@@ -106,6 +106,6 @@ class CityFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.M)
     private fun hideKeyboard(){
         val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(requireView().getWindowToken(), 0)
+        imm.hideSoftInputFromWindow(requireView().windowToken, 0)
     }
 }
