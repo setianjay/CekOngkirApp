@@ -9,6 +9,7 @@ import com.setianjay.cekongkirapp.network.resource.Resource
 import com.setianjay.cekongkirapp.network.response.CityResponse
 import com.setianjay.cekongkirapp.network.response.SubDistrictResponse
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.lang.Exception
 
 class CityViewModel(
@@ -20,6 +21,7 @@ class CityViewModel(
 
     init {
         fetchCity()
+        Timber.e("CityViewModel: is created")
     }
 
     fun fetchCity() = viewModelScope.launch {
@@ -40,5 +42,10 @@ class CityViewModel(
         }catch (e: Exception){
             subDistrictResponse.value = Resource.Error(e.message.toString())
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        Timber.e("CityViewModel: ViewModel is destroyed")
     }
 }
