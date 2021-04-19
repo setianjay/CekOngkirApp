@@ -44,6 +44,10 @@ class CityViewModel(
         }
     }
 
+    fun savePreferences(type: String, id: String, name: String){
+        repository.setPreferences(type,id,name)
+    }
+
     override fun onCleared() {
         super.onCleared()
         Timber.e("CityViewModel: ViewModel is destroyed")
