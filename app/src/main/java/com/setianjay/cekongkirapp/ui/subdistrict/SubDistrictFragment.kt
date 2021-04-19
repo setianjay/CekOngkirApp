@@ -16,11 +16,14 @@ import com.setianjay.cekongkirapp.ui.city.CityViewModel
 import timber.log.Timber
 
 class SubDistrictFragment : Fragment() {
-    private val viewModel: CityViewModel by lazy { ViewModelProvider(requireActivity()).get(CityViewModel::class.java) }
-    private lateinit var binding: FragmentSubdistrictBinding
-    private lateinit var subDistrictAdapter: SubDistrictAdapter
-    private val cityId by lazy { requireArguments().getString("city_id") }
-    private val cityName by lazy { requireArguments().getString("city_name") }
+    private val viewModel: CityViewModel by lazy {
+        ViewModelProvider(requireActivity()).get(CityViewModel::class.java) // ViewModel
+    }
+    private lateinit var binding: FragmentSubdistrictBinding // ViewBinding
+    private lateinit var subDistrictAdapter: SubDistrictAdapter // Adapter
+    private val type by lazy { requireActivity().intent.getStringExtra("type") } // Data Intent
+    private val cityId by lazy { requireArguments().getString("city_id") } // Data Intent
+    private val cityName by lazy { requireArguments().getString("city_name") } // Data Intent
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,7 +51,11 @@ class SubDistrictFragment : Fragment() {
     private fun setupRecycleView(){
         subDistrictAdapter = SubDistrictAdapter(arrayListOf(),object : SubDistrictAdapter.OnAdapterListener{
             override fun onClick(data: SubDistrictResponse.RajaOngkir.Results) {
-                Timber.e("subDistrict: ${data.subdistrict_name}")
+                viewModel.savePreferences(
+                    type = type!!,
+                    id = data.subdistrict_id,
+                    name = "$cityName, ${data.subdistrict_name}"
+                )
             }
         })
 
