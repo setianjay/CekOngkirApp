@@ -7,6 +7,7 @@ import com.setianjay.cekongkirapp.network.api.ApiService
 import com.setianjay.cekongkirapp.network.api.RajaOngkirEndPoint
 import com.setianjay.cekongkirapp.network.repository.RajaOngkirRepository
 import com.setianjay.cekongkirapp.ui.city.CityViewModelFactory
+import com.setianjay.cekongkirapp.ui.cost.CostViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -29,10 +30,18 @@ class App: Application(), KodeinAware{
     override val kodein: Kodein = Kodein.lazy {
         import(androidXModule(this@App))
 
-        bind<RajaOngkirEndPoint>() with singleton { ApiService.getClient() } // Api
+        // Api
+        bind<RajaOngkirEndPoint>() with singleton { ApiService.getClient() } // RajaOngkir API
+
+        // Preferences
         bind() from singleton { CostPreferences( instance() ) } // CostPreferences
-        bind() from singleton { RajaOngkirRepository(instance(), instance()) } // Repository
-        bind() from singleton { CityViewModelFactory(instance()) } // ViewModel Factory
+
+        // Repository
+        bind() from singleton { RajaOngkirRepository(instance(), instance()) } // RajaOngkir Repository
+
+        // ViewModelFactory
+        bind() from singleton { CityViewModelFactory(instance()) } // CityViewModelFactory
+        bind() from singleton { CostViewModelFactory(instance()) } // CostViewModelFactory
 
     }
 }
