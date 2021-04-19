@@ -32,7 +32,7 @@ class App: Application(), KodeinAware{
         bind<RajaOngkirEndPoint>() with singleton { ApiService.getClient() } // Api
         bind() from singleton { CostPreferences( instance() ) } // CostPreferences
         bind() from singleton { RajaOngkirRepository(instance(), instance()) } // Repository
-        bind() from singleton { CityViewModelFactory(instance()) }
+        bind() from singleton { CityViewModelFactory(instance()) } // ViewModel Factory
 
     }
 }

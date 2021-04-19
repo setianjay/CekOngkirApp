@@ -5,17 +5,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.setianjay.cekongkirapp.R
-import com.setianjay.cekongkirapp.database.preferences.CostPreferences
-import com.setianjay.cekongkirapp.network.api.ApiService
-import com.setianjay.cekongkirapp.network.repository.RajaOngkirRepository
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.kodein
+import org.kodein.di.generic.instance
 
-class CityActivity : AppCompatActivity() {
+class CityActivity : AppCompatActivity(), KodeinAware {
+
     private val TAG = "CityActivity"
+    override val kodein by kodein()
     private lateinit var viewModel: CityViewModel // View Model
-    private lateinit var viewModelFactory: CityViewModelFactory // View Model Factory
-    private lateinit var repository: RajaOngkirRepository // Repository
-    private val api by lazy { ApiService.getClient() }
-    private val preferences by lazy { CostPreferences(this) }
+    private val viewModelFactory: CityViewModelFactory by instance() // View Model Factory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,8 +24,6 @@ class CityActivity : AppCompatActivity() {
     }
 
     private fun setupViewModel(){
-        repository = RajaOngkirRepository(api, preferences)
-        viewModelFactory = CityViewModelFactory(repository)
         viewModel = ViewModelProvider(this,viewModelFactory).get(CityViewModel::class.java)
     }
 
@@ -40,4 +37,5 @@ class CityActivity : AppCompatActivity() {
         onBackPressed()
         return super.onSupportNavigateUp()
     }
+
 }
