@@ -9,4 +9,10 @@
     <string name="cari_kota">Cari Kota</string>
     <string name="nama_kecamatan">Nama Kecamatan</string>
     <string name="nama_kota">Nama Kota</string>
+    <string name="pos">pos</string>
+    <string name="pos_indonesia_pos">POS INDONESIA (POS)</string>
+    <string name="paket_kilat_khusus">Paket Kilat Khusus</string>
+    <string name="_2_3_hari">2 sampai 3 HARI</string>
+    <string name="idr_20_000">IDR 20.000</string>
+    <string name="harga_ongkos_kirim_1_kg">Harga ongkos kirim / 1 KG</string>
 </resources>

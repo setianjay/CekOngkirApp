@@ -1,10 +1,10 @@
 package com.setianjay.cekongkirapp.network.response
 
 data class CostResponse(
-    val rajaongkir: Rajaongkir
+    val rajaongkir: RajaOngkir
 ) {
 
-    data class Rajaongkir (
+    data class RajaOngkir (
         val destination_details: DestinationDetails,
         val origin_details: OriginDetails,
         val query: Query,

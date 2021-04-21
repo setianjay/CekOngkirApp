@@ -2,7 +2,6 @@ package com.setianjay.cekongkirapp.ui.cost
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
-import com.setianjay.cekongkirapp.R
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.setianjay.cekongkirapp.database.preferences.PreferencesModel
 import com.setianjay.cekongkirapp.databinding.FragmentCostBinding
 import com.setianjay.cekongkirapp.network.resource.Resource
@@ -21,6 +20,7 @@ import timber.log.Timber
 class CostFragment : Fragment() {
     private val viewModel by lazy { ViewModelProvider(requireActivity()).get(CostViewModel::class.java) }
     private lateinit var binding: FragmentCostBinding
+    private lateinit var costAdapter: CostAdapter
     private var originSubdistrictId: String? = ""
     private var destinationSubdistrictId: String? = ""
 
@@ -35,6 +35,7 @@ class CostFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupRecycleView()
         initListener()
         setupObserve()
     }
@@ -43,6 +44,16 @@ class CostFragment : Fragment() {
         super.onStart()
         loading(false)
         viewModel.getPreferences()
+    }
+
+    private fun setupRecycleView(){
+        costAdapter = CostAdapter(arrayListOf())
+
+        binding.rvCost.apply {
+            layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
+            adapter = costAdapter
+            setHasFixedSize(true)
+        }
     }
 
     private fun initListener() {
@@ -75,7 +86,7 @@ class CostFragment : Fragment() {
                     destination = destinationSubdistrictId!!,
                     destinationType = "subdistrict",
                     weight = "1000",
-                    courier = "sicepat:pos"
+                    courier = "sicepat:pos:jnt"
                 )
             }
         }
@@ -106,7 +117,8 @@ class CostFragment : Fragment() {
                 }
                 is Resource.Success -> {
                     loading(false)
-                    Timber.e("CostAPI: ${it.data!!.rajaongkir.results}")
+                    costAdapter.setData(it.data!!.rajaongkir.results)
+                    Timber.e("CostAPI: ${it.data.rajaongkir.results}")
                 }
                 is Resource.Error -> {
                     Timber.e("CostAPI: isError")
