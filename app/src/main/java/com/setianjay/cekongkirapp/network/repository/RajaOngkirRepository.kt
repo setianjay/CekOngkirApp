@@ -5,6 +5,7 @@ import com.setianjay.cekongkirapp.database.preferences.CostPreferences
 import com.setianjay.cekongkirapp.database.preferences.PreferencesModel
 import com.setianjay.cekongkirapp.network.api.RajaOngkirEndPoint
 import com.setianjay.cekongkirapp.network.response.CityResponse
+import com.setianjay.cekongkirapp.network.response.CostResponse
 import com.setianjay.cekongkirapp.network.response.SubDistrictResponse
 import retrofit2.Response
 
@@ -40,4 +41,13 @@ class RajaOngkirRepository(
             PreferencesModel("destination",preference.getString(Constants.PREF_DESTINATION_ID),preference.getString(Constants.PREF_DESTINATION_NAME))
         )
     }
+
+    suspend fun fetchCost(
+        origin: String,
+        originType: String,
+        destination: String,
+        destinationType: String,
+        weight: String,
+        courier: String
+    ) = api.cost(origin,originType,destination,destinationType,weight,courier)
 }
