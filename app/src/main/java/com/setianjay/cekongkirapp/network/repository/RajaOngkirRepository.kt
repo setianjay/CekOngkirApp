@@ -42,6 +42,10 @@ class RajaOngkirRepository(
         )
     }
 
+    fun clearPreferences(){
+        preference.clearPreferences()
+    }
+
     suspend fun fetchCost(
         origin: String,
         originType: String,

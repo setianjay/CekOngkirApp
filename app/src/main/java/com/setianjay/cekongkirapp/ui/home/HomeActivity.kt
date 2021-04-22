@@ -42,6 +42,7 @@ class HomeActivity : AppCompatActivity(),KodeinAware {
 
     private fun setupViewModel(){
         viewModel = ViewModelProvider(this,costFactory).get(CostViewModel::class.java)
+        viewModel.clearPreference()
     }
 
 }

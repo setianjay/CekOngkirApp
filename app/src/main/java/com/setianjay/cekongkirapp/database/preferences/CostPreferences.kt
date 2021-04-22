@@ -22,4 +22,8 @@ class CostPreferences(context: Context) {
     fun getString(key: String): String? {
         return sharedPref.getString(key,null)
     }
+
+    fun clearPreferences(){
+        sharedPref.edit().clear().apply()
+    }
 }

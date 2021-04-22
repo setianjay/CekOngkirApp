@@ -20,6 +20,10 @@ class CostViewModel(
         preferences.value = repository.getPreferences()
     }
 
+    fun clearPreference(){
+        repository.clearPreferences()
+    }
+
    fun fetchCost(
        origin: String,
        originType: String,
