@@ -8,6 +8,7 @@ import com.setianjay.cekongkirapp.network.api.RajaOngkirEndPoint
 import com.setianjay.cekongkirapp.network.repository.RajaOngkirRepository
 import com.setianjay.cekongkirapp.ui.city.CityViewModelFactory
 import com.setianjay.cekongkirapp.ui.cost.CostViewModelFactory
+import com.setianjay.cekongkirapp.ui.tracking.TrackingViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -42,6 +43,7 @@ class App: Application(), KodeinAware{
         // ViewModelFactory
         bind() from singleton { CityViewModelFactory(instance()) } // CityViewModelFactory
         bind() from singleton { CostViewModelFactory(instance()) } // CostViewModelFactory
+        bind() from singleton { TrackingViewModelFactory(instance()) } // TrackingViewModelFactory
 
     }
 }
