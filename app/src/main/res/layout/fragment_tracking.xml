@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.tracking.TrackingFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -31,18 +32,31 @@
             android:text="@string/pilih_kurir" />
 
         <RelativeLayout
+            android:id="@+id/list_courier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_border_1_020202">
 
             <Spinner
-                android:id="@+id/list_courier"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="4dp"
+                android:entries="@array/courier"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"/>
         </RelativeLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_find"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lacak"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:cornerRadius="8dp"
+            android:backgroundTint="@color/color_4d79ff"
+            android:layout_marginTop="10dp"
+            android:padding="13dp"/>
     </LinearLayout>
 
 </FrameLayout>
