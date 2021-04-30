@@ -18,6 +18,13 @@
     <string name="masukan_no_resi">Masukan No. Resi</string>
     <string name="pilih_kurir">Pilih Kurir</string>
     <string name="lacak">Lacak</string>
+    <string name="status_pengiriman">Status Pengiriman</string>
+    <string name="status">Status</string>
+    <string name="receiver">Penerima</string>
+    <string name="date">Date</string>
+    <string name="history_tracking">History Pengiriman</string>
+    <string name="example_date">2020-11-11</string>
+    <string name="example_tracking_description">Paket telah sampai di Surabaya</string>
 
     <string-array name="courier">
         <item>POS</item>
