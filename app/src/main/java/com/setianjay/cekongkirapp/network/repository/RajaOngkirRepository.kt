@@ -7,6 +7,7 @@ import com.setianjay.cekongkirapp.network.api.RajaOngkirEndPoint
 import com.setianjay.cekongkirapp.network.response.CityResponse
 import com.setianjay.cekongkirapp.network.response.CostResponse
 import com.setianjay.cekongkirapp.network.response.SubDistrictResponse
+import com.setianjay.cekongkirapp.network.response.WayBillResponse
 import retrofit2.Response
 
 class RajaOngkirRepository(
@@ -20,6 +21,10 @@ class RajaOngkirRepository(
 
     suspend fun fetchSubDistrict(city_id: String): Response<SubDistrictResponse>{
         return api.subDistrict(city_id)
+    }
+
+    suspend fun fetchWayBill(waybill: String, courier: String): Response<WayBillResponse>{
+        return api.waybill(waybill,courier)
     }
 
     fun setPreferences(type: String, id: String, name: String){

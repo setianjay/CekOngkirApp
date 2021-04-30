@@ -3,6 +3,7 @@ package com.setianjay.cekongkirapp.network.api
 import com.setianjay.cekongkirapp.network.response.CityResponse
 import com.setianjay.cekongkirapp.network.response.CostResponse
 import com.setianjay.cekongkirapp.network.response.SubDistrictResponse
+import com.setianjay.cekongkirapp.network.response.WayBillResponse
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -26,4 +27,11 @@ interface RajaOngkirEndPoint {
         @Field("weight") weight: String,
         @Field("courier") courier: String
     ): Response<CostResponse>
+
+    @FormUrlEncoded
+    @POST("waybill")
+    suspend fun waybill(
+        @Field("waybill") waybill: String,
+        @Field("courier") courier: String
+    ): Response<WayBillResponse>
 }
