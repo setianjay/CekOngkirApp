@@ -68,4 +68,8 @@ class RajaOngkirRepository(
 
     fun getWayBill() =
         db.wayBillDao().select()
+
+    suspend fun deleteWayBill(entity: WayBillEntity){
+        db.wayBillDao().delete(entity)
+    }
 }

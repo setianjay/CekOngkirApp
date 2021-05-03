@@ -38,7 +38,23 @@ class WayBillFragment : Fragment() {
     }
 
     private fun setupRecycleView(){
-        wayBillAdapter = WayBillAdapter(arrayListOf())
+        wayBillAdapter = WayBillAdapter(arrayListOf(), object : WayBillAdapter.OnAdapterListener {
+            override fun onDelete(data: WayBillEntity) {
+                val dialog = AlertDialog.Builder(requireContext())
+                dialog.apply {
+                    setTitle("Hapus Resi")
+                    setMessage("Hapus No. Resi ${data.wayBill}?")
+                    setPositiveButton("Hapus"){ _,_ ->
+                        viewModel.deleteWayBill(data)
+                    }
+                    setNegativeButton("Tidak"){_,_ ->
+
+                    }
+                    show()
+                }
+            }
+
+        })
 
         binding.rvListTracking.apply {
             layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)

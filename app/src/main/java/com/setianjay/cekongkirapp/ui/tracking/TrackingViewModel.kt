@@ -41,4 +41,10 @@ class TrackingViewModel(
         }
     }
 
+    fun deleteWayBill(entity: WayBillEntity){
+        viewModelScope.launch {
+            repository.deleteWayBill(entity)
+        }
+    }
+
 }
