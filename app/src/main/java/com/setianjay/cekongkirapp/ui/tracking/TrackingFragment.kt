@@ -19,6 +19,9 @@ import timber.log.Timber
 class TrackingFragment : Fragment() {
     private lateinit var binding: FragmentTrackingBinding
     private val couriers by lazy { resources.getStringArray(R.array.courier) }
+    private val isTracking by lazy { requireActivity().intent.getBooleanExtra("is_tracking",false) }
+    private val waybill by lazy { requireActivity().intent.getStringExtra("waybill") }
+    private val courier by lazy { requireActivity().intent.getStringExtra("courier") }
 //    private lateinit var selectedCourier: String
 
     override fun onCreateView(
@@ -57,6 +60,14 @@ class TrackingFragment : Fragment() {
 //                selectedCourier = parent.getItemAtPosition(position).toString()
 //            }
 //        }
+        if (isTracking){
+            findNavController().navigate(
+                R.id.action_trackingFragment_to_trackingResultFragment,
+                bundleOf(
+                    "waybill" to waybill,
+                    "courier" to courier
+                ))
+        }
 
         binding.btnFind.setOnClickListener {
             findNavController().navigate(

@@ -54,6 +54,15 @@ class WayBillFragment : Fragment() {
                 }
             }
 
+            override fun onDetail(data: WayBillEntity) {
+                Intent(requireContext(),TrackingActivity::class.java).also {
+                    it.putExtra("is_tracking",true)
+                    it.putExtra("waybill", data.wayBill)
+                    it.putExtra("courier",data.courier)
+                    startActivity(it)
+                }
+            }
+
         })
 
         binding.rvListTracking.apply {

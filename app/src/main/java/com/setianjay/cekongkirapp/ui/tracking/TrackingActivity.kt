@@ -23,11 +23,16 @@ class TrackingActivity : AppCompatActivity(), KodeinAware {
         setupViewModel()
     }
 
-    private fun setupView(){
+    private fun setupView() {
         supportActionBar!!.setTitle(R.string.lacak_no_resi)
     }
 
-    private fun setupViewModel(){
-        viewModel = ViewModelProvider(this,viewModelFactory).get(TrackingViewModel::class.java)
+    private fun setupViewModel() {
+        viewModel = ViewModelProvider(this, viewModelFactory).get(TrackingViewModel::class.java)
+    }
+
+    override fun onBackPressed() {
+        if (intent.getBooleanExtra("is_tracking", false)) finish()
+        else super.onBackPressed()
     }
 }

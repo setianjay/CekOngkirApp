@@ -15,6 +15,7 @@ class WayBillAdapter(
 
     interface OnAdapterListener{
         fun onDelete(data: WayBillEntity)
+        fun onDetail(data: WayBillEntity)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -36,6 +37,10 @@ class WayBillAdapter(
             binding.container.setOnLongClickListener {
                 listener.onDelete(data)
                 true
+            }
+
+            binding.container.setOnClickListener {
+                listener.onDetail(data)
             }
         }
     }
