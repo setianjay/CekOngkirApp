@@ -3,16 +3,18 @@ package com.setianjay.cekongkirapp.network.repository
 import com.setianjay.cekongkirapp.constant.Constants
 import com.setianjay.cekongkirapp.database.preferences.CostPreferences
 import com.setianjay.cekongkirapp.database.preferences.PreferencesModel
+import com.setianjay.cekongkirapp.database.presistence.CekOngkirDatabase
+import com.setianjay.cekongkirapp.database.presistence.WayBillEntity
 import com.setianjay.cekongkirapp.network.api.RajaOngkirEndPoint
 import com.setianjay.cekongkirapp.network.response.CityResponse
-import com.setianjay.cekongkirapp.network.response.CostResponse
 import com.setianjay.cekongkirapp.network.response.SubDistrictResponse
 import com.setianjay.cekongkirapp.network.response.WayBillResponse
 import retrofit2.Response
 
 class RajaOngkirRepository(
     private val api: RajaOngkirEndPoint,
-    private val preference: CostPreferences
+    private val preference: CostPreferences,
+    private val db: CekOngkirDatabase
 ) {
 
     suspend fun fetchCity(): Response<CityResponse>{
@@ -59,4 +61,11 @@ class RajaOngkirRepository(
         weight: String,
         courier: String
     ) = api.cost(origin,originType,destination,destinationType,weight,courier)
+
+    suspend fun saveWayBill(entity: WayBillEntity){
+        db.wayBillDao().insert(entity)
+    }
+
+    fun getWayBill() =
+        db.wayBillDao().select()
 }

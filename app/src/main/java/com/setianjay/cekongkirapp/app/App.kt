@@ -3,6 +3,7 @@ package com.setianjay.cekongkirapp.app
 import android.app.Application
 import com.setianjay.cekongkirapp.BuildConfig
 import com.setianjay.cekongkirapp.database.preferences.CostPreferences
+import com.setianjay.cekongkirapp.database.presistence.CekOngkirDatabase
 import com.setianjay.cekongkirapp.network.api.ApiService
 import com.setianjay.cekongkirapp.network.api.RajaOngkirEndPoint
 import com.setianjay.cekongkirapp.network.repository.RajaOngkirRepository
@@ -37,8 +38,11 @@ class App: Application(), KodeinAware{
         // Preferences
         bind() from singleton { CostPreferences( instance() ) } // CostPreferences
 
+        // Databases
+        bind() from singleton { CekOngkirDatabase(instance()) } // CekOngkirDatabase
+
         // Repository
-        bind() from singleton { RajaOngkirRepository(instance(), instance()) } // RajaOngkir Repository
+        bind() from singleton { RajaOngkirRepository(instance(), instance(), instance()) } // RajaOngkir Repository
 
         // ViewModelFactory
         bind() from singleton { CityViewModelFactory(instance()) } // CityViewModelFactory
