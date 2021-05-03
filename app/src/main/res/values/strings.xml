@@ -25,6 +25,9 @@
     <string name="history_tracking">History Pengiriman</string>
     <string name="example_date">2020-11-11</string>
     <string name="example_tracking_description">Paket telah sampai di Surabaya</string>
+    <string name="sample_waybill">000421030564</string>
+    <string name="sample_status">DELIVERED</string>
+    <string name="sample_courier">SiCepat</string>
 
     <string-array name="courier">
         <item>POS</item>

@@ -10,6 +10,8 @@ import com.setianjay.cekongkirapp.R
 import com.setianjay.cekongkirapp.databinding.ActivityHomeBinding
 import com.setianjay.cekongkirapp.ui.cost.CostViewModel
 import com.setianjay.cekongkirapp.ui.cost.CostViewModelFactory
+import com.setianjay.cekongkirapp.ui.tracking.TrackingViewModel
+import com.setianjay.cekongkirapp.ui.tracking.TrackingViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
@@ -20,8 +22,10 @@ class HomeActivity : AppCompatActivity(),KodeinAware {
 
 
     override val kodein: Kodein by kodein()
-    private lateinit var viewModel: CostViewModel
+    private lateinit var costViewModel: CostViewModel
+    private lateinit var trackingViewModel: TrackingViewModel
     private val costFactory: CostViewModelFactory by instance()
+    private val trackingFactory: TrackingViewModelFactory by instance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,8 +45,10 @@ class HomeActivity : AppCompatActivity(),KodeinAware {
     }
 
     private fun setupViewModel(){
-        viewModel = ViewModelProvider(this,costFactory).get(CostViewModel::class.java)
-        viewModel.clearPreference()
+        costViewModel = ViewModelProvider(this,costFactory).get(CostViewModel::class.java)
+        costViewModel.clearPreference()
+
+        trackingViewModel = ViewModelProvider(this,trackingFactory).get(TrackingViewModel::class.java)
     }
 
 }
